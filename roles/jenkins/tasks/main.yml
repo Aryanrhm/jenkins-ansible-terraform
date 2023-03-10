@@ -12,7 +12,7 @@
 
 - name: Install java
   apt:
-    name: java-11-openjdk-devel
+    name: openjdk-11-jdk
     state: present
 
 - name: Install jenkins

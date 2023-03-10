@@ -2,13 +2,13 @@
 #  source   = "git::https://github.com/Aryanrhm/aws-terraform-modules.git//services/security_group"
 
 module "iam_role_create" {
-  source       = "../aws-terraform-modules/services/iam_role"
+  source       = "git::https://github.com/Aryanrhm/aws-terraform-modules.git//services/iam_role"
   name = var.name
   iam_role_policy = var.iam_role_policy
 }
 
 module "security_group" {
-  source   = "../aws-terraform-modules/services/security_group"
+  source   = "git::https://github.com/Aryanrhm/aws-terraform-modules.git//services/security_group"
   name  = var.sg_name
   ports = var.sg_ingress_ports
 }
@@ -17,12 +17,12 @@ module "security_group" {
 module "key_pairs" {
   name = var.key_name
   pem_file_name = var.pem_file_name
-  source = "../aws-terraform-modules/services/key_pairs"
+  source = "git::https://github.com/Aryanrhm/aws-terraform-modules.git//services/key_pairs"
 }
 
 
 module "ec2_instance" {
-  source        = "../aws-terraform-modules/services/ec2_instance"
+  source        = "git::https://github.com/Aryanrhm/aws-terraform-modules.git//services/ec2_instance"
   pem_file_name = var.pem_file_name
 
   name  = var.name
