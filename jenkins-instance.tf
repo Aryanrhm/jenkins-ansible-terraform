@@ -59,7 +59,7 @@ resource "null_resource" "null" {
 }
 
   provisioner "local-exec" {
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${module.ec2_instance.instance_ip},' --private-key ${var.pem_file_name}  jenkins.yml"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${module.ec2_instance.instance_ip},' --private-key ${var.pem_file_name}  install-jenkins.yaml"
   }
 }
 

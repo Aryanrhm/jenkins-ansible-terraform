@@ -1,0 +1,13 @@
+- name: Install and Configure Jenkins
+  hosts: all
+  remote_user: aryan
+  become: yes
+  vars_files:
+    - ./variables.yaml
+    - ./secrets_file.yaml
+
+  roles:
+    - install-docker
+    - install-git
+    - install-jenkins
+    - jenkinscasc

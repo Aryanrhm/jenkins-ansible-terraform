@@ -1,0 +1,84 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
+  securityRealm:
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "aryan"
+        name: "Aryan Rahimi"
+        properties:
+        - "apiToken"
+        - preferredProvider:
+            providerId: "default"
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+        - usernamePassword:
+            id: "docker-hub"
+            password: "{{ docker_hub_pass }}"
+            scope: GLOBAL
+            username: "{{ docker_hub_user }}"
+        - string:
+            id: "slack-alerts-token"
+            scope: GLOBAL
+            secret: "${readFile:/var/lib/jenkins/slack.secret}"
+
+tool:
+  dockerTool:
+    installations:
+    - home: "/usr/bin/docker"
+      name: "default"
+  git:
+    installations:
+    - home: "git"
+      name: "default"
+  nodejs:
+    installations:
+    - name: "default"
+      properties:
+      - installSource:
+          installers:
+          - nodeJSInstaller:
+              id: "19.7.0"
+              npmPackagesRefreshHours: 72
+jobs:
+  - script: >
+      pipelineJob('nodejs-pipeline') { 
+      
+        def repo = 'https://github.com/aryanrhm/nodejs-pipeline.git' 
+        def sshRepo = 'git@github.com:aryanrhm/nodejs-pipeline.git' 
+      
+        description("Pipeline for NodeJS applicaiton") 
+        keepDependencies(false) 
+      
+        properties{ 
+      
+          githubProjectUrl (repo) 
+          rebuild { 
+            autoRebuild(false) 
+          } 
+        } 
+      
+        definition { 
+      
+          cpsScm { 
+            scm { 
+              git { 
+                remote { url(sshRepo) }
+                branches('master') 
+                scriptPath('misc/Jenkinsfile.v2') 
+                extensions { }
+              } 
+            } 
+          } 
+        }
+      }
+
+
+unclassified:
+ slackNotifier:
+   teamDomain: "jenkinstest-srd9125"
+   tokenCredentialId: "slack-alerts-token"
+
