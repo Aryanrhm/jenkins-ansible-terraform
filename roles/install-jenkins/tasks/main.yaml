@@ -29,3 +29,7 @@
     name: jenkins
     state: started
 
+- name: Pause for 1 minutes to start Jenkins again
+  ansible.builtin.pause:
+    minutes: 1
+
