@@ -19,7 +19,8 @@ To use this code, follow these steps:
 * Run terraform init to initialize the Terraform working directory.
 * Run terraform apply to apply the Terraform code and create the EC2 instance and security group.
 
-Once the EC2 instance is created, Terraform will run the local-exec provisioner, which will install and configure Jenkins using Ansible.
+Once the EC2 instance is created, Terraform will run the local-exec provisioner, which will install and configure Jenkins using Ansible. The pipeline is created based on the Jenkinsfile located in [this repo] (https://github.com/aryanrhm/nodejs-pipeline) under the misc directory.
+ 
 
 ### Contributing
 If you find a bug or have a suggestion for this repository, please open an issue or submit a pull request. Contributions are always welcome!
