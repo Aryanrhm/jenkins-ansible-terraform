@@ -1,0 +1,17 @@
+sg_name = "jenkins_sg"
+sg_ingress_ports = [8080, 22]
+name = "jenkins"
+ec2_instance_type = "t2.micro"
+ec2_eip = false
+tg_attach = false
+ec2_extra_ebs = false
+tg_port = 8080
+ebs_size = 2
+ebs_az = ""
+role_name = "jenkins"
+tg_arn = "default"
+ebs_device_name = "jenkins"
+key_name = "jenkins-key"
+pem_file_name = "jenkins.pem"
+user_data = false
+iam_role_policy = false
