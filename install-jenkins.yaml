@@ -1,6 +1,6 @@
 - name: Install and Configure Jenkins
   hosts: all
-  remote_user: aryan
+  remote_user: ubuntu
   become: yes
   vars_files:
     - ./variables.yaml
