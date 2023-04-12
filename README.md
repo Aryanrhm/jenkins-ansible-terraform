@@ -1,7 +1,7 @@
 ## Jenkins-Ansible-Terraform
 
 
-This repository contains the code to deploy and configure a Jenkins server on an EC2 instance using Ansible and Terraform. The Jenkins server is then configured with Jenkins Configuration as Code (JCasC) to create a pipeline job that runs a Jenkinsfile located in another repository.
+This repository uses the Jenkins AMI created whit Packer and Ansible using [this](https://github.com/aryanrhm/jenkins-ami) repository. The Jenkins server is then configured with Jenkins Configuration as Code (JCasC) to create a pipeline job that runs a Jenkinsfile located in another repository.
 
 ### Prerequisites
 Before you can use this code, you need to have the following:
@@ -19,7 +19,7 @@ To use this code, follow these steps:
 * Run terraform init to initialize the Terraform working directory.
 * Run terraform apply to apply the Terraform code and create the EC2 instance and security group.
 
-Once the EC2 instance is created, Terraform will run the local-exec provisioner, which will install and configure Jenkins using Ansible. The pipeline is created based on the Jenkinsfile located in [this repo](https://github.com/aryanrhm/nodejs-pipeline) under the misc directory.
+Once the EC2 instance is created, Terraform will run the local-exec provisioner, which will configure Jenkins using Ansible. The pipeline is created based on the Jenkinsfile located in [this repo](https://github.com/aryanrhm/nodejs-pipeline) under the misc directory.
  
 
 ### Contributing
