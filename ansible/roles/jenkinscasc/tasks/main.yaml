@@ -1,0 +1,21 @@
+---
+- name: Template jenkins.yaml file for Configuration as Code
+  ansible.builtin.template:
+    src: ./jenkins.j2
+    dest: /var/lib/jenkins/jenkins.yaml
+    owner: jenkins
+    group: jenkins
+    mode: '0644'
+
+- name: Template slack.secret file
+  ansible.builtin.template:
+    src: ./slack-secret.j2
+    dest: /var/lib/jenkins/slack.secret
+    owner: jenkins
+    group: jenkins
+    mode: '0644'
+
+- name: Restart jenkins
+  ansible.builtin.systemd:
+    name: jenkins
+    state: restarted

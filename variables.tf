@@ -17,6 +17,10 @@ variable "sg_ingress_ports" {
 
 #### EC2 Instance ####
 
+variable "ami_id" {
+  type = string
+}
+
 variable "ec2_instance_type" {
   type = string
   default = "t2_micro"

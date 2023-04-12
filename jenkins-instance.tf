@@ -26,7 +26,7 @@ module "ec2_instance" {
   pem_file_name = var.pem_file_name
 
   name  = var.name
-  ami_id        = data.aws_ami.ubuntu.id
+  ami_id        = var.ami_id
   instance_type = var.ec2_instance_type
   eip           = var.ec2_eip
   extra_ebs     = var.ec2_extra_ebs
@@ -53,13 +53,13 @@ resource "null_resource" "null" {
   connection {
     host        = module.ec2_instance.instance_ip
     type        = "ssh"
-    user        = "ubuntu"
+    user        = "ec2-user"
     private_key = file(var.pem_file_name)
   }
 }
 
   provisioner "local-exec" {
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${module.ec2_instance.instance_ip},' --private-key ${var.pem_file_name}  install-jenkins.yaml"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ec2-user -i '${module.ec2_instance.instance_ip},' --private-key ${var.pem_file_name}  ./ansible/install-jenkins.yaml"
   }
 }
 
